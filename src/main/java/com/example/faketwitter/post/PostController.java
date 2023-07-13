@@ -25,4 +25,9 @@ public class PostController {
   public List<Post> getAllPosts() {
     return postService.getAllPosts();
   }
+  
+  @DeleteMapping("/{id}")
+  public void deletePost(@PathVariable UUID id) {
+    postService.deletePost(id);
+  }
 }

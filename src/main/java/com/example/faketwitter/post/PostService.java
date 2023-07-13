@@ -1,7 +1,6 @@
 package com.example.faketwitter.post;
 
 import com.example.faketwitter.user.User;
-import com.example.faketwitter.user.UserRepository;
 import com.example.faketwitter.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,4 +28,9 @@ public class PostService {
   public List<Post> getAllPosts() {
     return postRepository.findAll();
   }
+  
+  public void deletePost(UUID id) {
+    postRepository.deleteById(id);
+  }
+  
 }
