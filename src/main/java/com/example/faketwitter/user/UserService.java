@@ -15,8 +15,15 @@ public class UserService {
     this.userRepository = userRepository;
   }
   
-  public User createUser(User user) {
-    return userRepository.save(user);
+  public User createUser(User newUser) {
+    User user = getUserByEmailOrUsername(newUser.getEmail(), newUser.getUsername());
+
+    if (!(user == null)) {
+      throw new IllegalStateException("User already exists");
+    }
+    
+    
+    return userRepository.save(newUser);
   }
   
   public List<User> getAllUsers() {
@@ -29,5 +36,9 @@ public class UserService {
   
   public void deleteUser(UUID id) {
     userRepository.deleteById(id);
+  }
+  
+  public User getUserByEmailOrUsername(String email, String username) {
+    return userRepository.findByEmailOrUsername(email, username).orElse(null);
   }
 }
